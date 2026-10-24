@@ -1,0 +1,58 @@
+# Mission : motion design sur mon portfolio
+
+## Structure du projet
+Le portfolio est découpé en fichiers dans ce dossier :
+- index.html : structure et contenu
+- styles.css : tous les styles
+- script.js : toute la logique (génération des outils, carrousel de projets, formulaire WhatsApp, thème)
+- photo.png : image du portfolio, à ne pas modifier
+Ignore "Portfolio KoSam.html" : c'est l'ancienne version en un seul fichier, ne la modifie pas.
+
+## Mode de travail
+- Modifie index.html, styles.css et script.js directement sur place. Ne crée aucun nouveau fichier.
+- Range le motion proprement : tout le CSS ajouté dans styles.css sous un bloc "/* MOTION */", tout le JS ajouté dans script.js sous un bloc "// MOTION". Dans index.html, ne touche qu'aux attributs ou classes nécessaires.
+- Fais des modifications ciblées, ne réécris pas un fichier en entier.
+- Procède par étapes : d'abord la PARTIE 2 (bande d'outils), puis la PARTIE 1 (motion global), une animation à la fois.
+- Ne pose pas de questions, fais les choix toi-même.
+
+## Identité à respecter
+- Palette : orange #D4540F (clair) / #FF7A2F (sombre), bleu nuit #0A1628, crème #F4F1EA
+- Polices : Familjen Grotesk (titres), DM Sans (texte), Instrument Serif (accents)
+- Thème clair/sombre (bouton #theme) : toutes les animations doivent marcher dans les deux
+
+## PARTIE 2 : Section "Les outils que j'utilise" en bande défilante (marquee)
+Les groupes sont générés dans script.js (variables G et L, boucle G.forEach qui crée .grp > h3 + .tools > .tool) et insérés dans #toolgroups. Garde cette génération et la mise en page (titre à gauche, outils à droite), mais transforme chaque .tools en bande horizontale qui défile à l'infini.
+- Chaque .tools devient un viewport (overflow hidden) avec une piste interne .mq-track en display:flex et width:max-content, animée en CSS : translateX(0) vers translateX(-50%), linear infinite.
+- La piste contient 2 séries identiques (.mq-set) pour une boucle sans coupure. Chaque série a un padding-right égal au gap, pas de marge entre les deux séries.
+- Si un groupe a peu d'outils (CMS, Desktop), répète les outils dans la série jusqu'à ce qu'elle soit plus large que le viewport. Recalcule au resize (avec debounce) et après document.fonts.ready.
+- Les copies dupliquées ont aria-hidden="true".
+- Sens alterné d'un groupe à l'autre (gauche, droite, gauche...), durée différente par groupe (par exemple 30 s + 6 s par groupe).
+- Bords en fondu : mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) (avec le préfixe -webkit-).
+- Pause de la bande au survol.
+- Chaque .tool flotte doucement (translateY de 0 à -6px, 3,4 s, ease-in-out, animation-delay différent par outil). Prévoir assez de padding vertical dans le viewport pour que la flottaison ne soit pas coupée.
+- Au survol d'un outil : bordure et ombre orange, icône SVG qui grossit (scale 1.2) en pivotant de -8°. Mets ce transform sur le svg, pas sur le .tool (qui porte déjà l'animation de flottaison).
+- Chaque groupe apparaît en fondu + translateY, l'un après l'autre (stagger), via IntersectionObserver.
+- Mobile : même défilement, avec les groupes en une seule colonne (titre au-dessus de la bande).
+- prefers-reduced-motion: reduce : pas de défilement, retour à une grille statique qui passe à la ligne, copies masquées.
+
+## PARTIE 1 : Motion global
+1. Chargement : intro courte (< 1,5 s). Le logo et le titre du hero apparaissent ligne par ligne (masque + translateY).
+2. Hero : le surlignage du <em> du h1 se dessine de gauche à droite. Les chips et les boutons arrivent en cascade (stagger). Le deck de cartes projets (.pc, .ctl) a une transition 3D fluide (légère rotation, profondeur, effet ressort) quand on change de projet.
+3. Scroll : chaque section se révèle (fade + translateY + léger scale) via IntersectionObserver. Stagger sur les cartes, services (.sv), étapes (.step), formations (.edu) et stats.
+4. Stats (.stats) : compteurs animés de 0 à la valeur quand ils entrent à l'écran.
+5. Nav : l'indicateur .ind glisse déjà, garde-le. Ajoute un effet magnétique au survol des boutons (.btn) et un soulignement animé.
+6. Formes de fond (.shapes) : garde le parallax au scroll et ajoute une dérive lente et continue.
+7. Section "Besoin" (.need) : feedback au clic sur les options (pop + remplissage), panneaux de questions qui s'ouvrent en glissant, bouton WhatsApp avec une pulsation douce.
+8. Footer : le gros texte (.big) se révèle au scroll. Le bouton flottant .fab entre avec un rebond puis pulse discrètement.
+9. Micro-interactions : cartes (.card) avec élévation + légère inclinaison au survol, boutons avec translation + ombre.
+
+## Contraintes techniques
+- Animer uniquement transform et opacity (60 fps).
+- CSS + JS vanilla. Si une lib est vraiment nécessaire, GSAP + ScrollTrigger depuis https://cdnjs.cloudflare.com, version fixée.
+- Respecte @media (prefers-reduced-motion: reduce) partout : motion supprimé ou fortement réduit.
+- Ne casse rien : formulaire dynamique WhatsApp (updateSend), toggle de thème, navigation, carrousel de projets, accessibilité (focus-visible, aria).
+- Le contenu doit rester visible si le JS échoue : n'applique jamais opacity:0 en CSS sans une classe ajoutée par le JS.
+- Responsive mobile.
+
+## À la fin
+Vérifie qu'il n'y a pas d'erreur de syntaxe JS, que index.html charge bien styles.css et script.js, puis résume en 5 lignes ce que tu as ajouté.
