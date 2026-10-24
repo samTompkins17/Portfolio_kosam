@@ -1,0 +1,23 @@
+{
+  "doctype": true,
+  "head_before_body": true,
+  "external_css": true,
+  "external_main_js": true,
+  "external_nav_js": true,
+  "embedded_data_uris_remaining_in_main_js": 0,
+  "images_extracted": 13,
+  "html_bytes": 58863,
+  "css_bytes": 54743,
+  "main_js_bytes": 24223,
+  "navigation_js_bytes": 762,
+  "js_checks": {
+    "main.js": {
+      "returncode": 0,
+      "stderr": ""
+    },
+    "navigation.js": {
+      "returncode": 0,
+      "stderr": ""
+    }
+  }
+}
