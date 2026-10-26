@@ -979,3 +979,10 @@ footer .big.glitch{animation:bigGlitch .45s steps(1) 1}
 #competences .pf .pfs{font-style:normal;color:var(--ink)}
 #competences .blob{opacity:.7}
 #competences .ring{opacity:.2}
+
+/* Badge de disponibilité */
+.avail{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;padding:7px 14px 7px 12px;border:1px solid var(--line);border-radius:99px;background:var(--card);font:600 12px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.avail .ad{position:relative;width:9px;height:9px;border-radius:50%;background:#22c55e}
+.avail .ad::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #22c55e;opacity:.6;animation:avPulse 2s ease-out infinite}
+@keyframes avPulse{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.avail .ad::after{animation:none}}
