@@ -986,3 +986,10 @@ footer .big.glitch{animation:bigGlitch .45s steps(1) 1}
 .avail .ad::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #22c55e;opacity:.6;animation:avPulse 2s ease-out infinite}
 @keyframes avPulse{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.7);opacity:0}}
 @media (prefers-reduced-motion:reduce){.avail .ad::after{animation:none}}
+
+/* Descriptions de projets (texte indexable) */
+.proj-text{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px}
+.proj-text article{padding:18px 20px;border:1px solid currentColor;border-color:color-mix(in srgb,currentColor 18%,transparent);border-radius:12px}
+.proj-text h3{margin:0 0 8px;font-size:1.05rem}
+.proj-text p{margin:0 0 8px;font-size:.95rem;line-height:1.55;opacity:.85}
+.proj-text .pt-stack{margin:0;font-size:.8rem;opacity:.6}

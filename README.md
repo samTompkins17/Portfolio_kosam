@@ -30,3 +30,7 @@ Ouvrir `index.html` dans un navigateur. Pour un environnement local, un petit se
 
 ## Logo
 Le logo officiel fourni est intégré dans l’en-tête via `assets/images/kosam-logo.png`.
+
+## SEO
+- `canonical`, Open Graph, Twitter Card et JSON-LD dans `index.html`.
+- `sitemap.xml` et `robots.txt` à la racine ; remplacer l’URL du site si le domaine change.
