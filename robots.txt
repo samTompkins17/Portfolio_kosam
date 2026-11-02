@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samtompkins17.github.io/Portfolio_kosam/sitemap.xml
